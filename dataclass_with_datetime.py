@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime
+from typing import List
 from pprint import pprint
 
 
@@ -10,7 +11,7 @@ class AboutMe:
     born_in: str
     born_on: datetime
     place_of_residence: str
-    interests: list[str] = field(default_factory=list)
+    interests: List[str] = field(default_factory=list)
 
     @property
     def age(self, BIRTH_YEAR: int = 1969) -> int:
