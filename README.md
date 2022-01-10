@@ -4,8 +4,8 @@
 
 ## **_dataclass_with_datetime.py_**
 
-### Returns person age in years
+Returns person age in years
 
 ## **_dataclass_with_datetime_and_relativedelta.py_**
 
-### Returns person age in years, month, and days 
+Returns person age in years, month, and days 
