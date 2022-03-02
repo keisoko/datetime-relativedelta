@@ -13,8 +13,8 @@ class AboutMe:
     place_of_residence: str
     interests: List[str] = field(default_factory=list)
 
-    @property
-    def age(self, BIRTH_YEAR: int = 1969) -> int:
+    @staticmethod
+    def age(BIRTH_YEAR: int = 1969) -> int:
         """Returns my current age."""
         current_year = datetime.now().year
         return current_year - BIRTH_YEAR
@@ -23,9 +23,6 @@ class AboutMe:
         """Appends new interest to the interests list."""
         if new_interest not in self.interests:
             self.interests.append(new_interest)
-
-    def favorite_quote(self, quote):
-        return quote
 
 
 about_me = {
@@ -43,7 +40,7 @@ dimaG = AboutMe(**about_me["dimaG"])
 dimaG.add_interest("Gaming")
 
 print(
-    f"My name is {dimaG.name}, I was born {dimaG.age} years ago in {dimaG.born_in} on\n{dimaG.born_on:%A, %B %d, %Y}, I am currently living in {dimaG.place_of_residence},\nand my interests are:", end="\n\n")
+    f"My name is {dimaG.name}, I was born {dimaG.age()} years ago in {dimaG.born_in} on\n{dimaG.born_on:%A, %B %d, %Y}, I am currently living in {dimaG.place_of_residence},\nand my interests are:", end="\n\n")
 
 pprint(dimaG.interests, indent=4, width=60)
 
@@ -53,4 +50,9 @@ print("The quote I like is:\n------------------\n")
 
 book_excerpt = "Yes, man is mortal, but that would be only half the trouble.\nThe worst of it is that he's sometimes unexpectedly mortal.\nThere's the trick! From The Master and Margarita by Mikhail Bulgakov."
 
-print(dimaG.favorite_quote(f"\"{book_excerpt}\""))
+
+def favorite_quote(quote):
+    return quote
+
+
+print(favorite_quote(f"\"{book_excerpt}\""))
