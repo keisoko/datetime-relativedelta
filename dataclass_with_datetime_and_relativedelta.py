@@ -11,7 +11,7 @@ class AboutMe:
     born_in: str
     born_on: datetime
     place_of_residence: str
-    interests: List[str] = field(default_factory=list)
+    interests: List[str | dict] = field(default_factory=list)
 
     @staticmethod
     def age(BIRTH_YEAR=datetime(year=1969, month=9, day=5)):
@@ -26,26 +26,23 @@ class AboutMe:
 
 
 def main():
-    about_me = {
-        "dimaG": {
-            "name": "Dmitriy G.",
-            "born_in": "Kiev, Ukraine",
-            "born_on": datetime(year=1969, month=9, day=5),
-            "place_of_residence": "Roselle, New Jersey",
-            "interests": [
-                {"Learning Programming": ["Python", "HTML", "CSS", "JavaScript"]},
-                "Science Fiction & Fantasy Audiobooks",
-                "Japanese Anime",
-            ],
-        }
-    }
 
-    dimaG = AboutMe(**about_me["dimaG"])
+    dimaG = AboutMe(
+        name="Dmitriy G",
+        born_in="Kiev, Ukraine",
+        born_on=datetime(year=1969, month=9, day=5),
+        place_of_residence="Roselle, New Jersey",
+        interests=[
+            {"Learning Programming": ["Python", "HTML", "CSS", "JavaScript"]},
+            "Science Fiction & Fantasy Audiobooks",
+            "Japanese Anime",
+        ],
+    )
 
     dimaG.add_interest("Gaming")
 
     print(
-        f"My name is {dimaG.name}, I was born {dimaG.age()} ago in {dimaG.born_in} on {dimaG.born_on:%A, %B %d, %Y},\nI am currently living in {dimaG.place_of_residence}, and my interests are:",
+        f"My name is {dimaG.name}, I was born {dimaG.age()} years ago in {dimaG.born_in} on\n{dimaG.born_on:%A, %B %d, %Y}, I am currently living in {dimaG.place_of_residence},\nand my interests are:",
         end="\n\n",
     )
 

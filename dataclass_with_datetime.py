@@ -12,7 +12,7 @@ class AboutMe:
     born_in: str
     born_on: datetime
     place_of_residence: str
-    interests: List[str] = field(default_factory=list)
+    interests: List[str | dict] = field(default_factory=list)
 
     @staticmethod
     def age(BIRTH_YEAR: int = 1969) -> int:
@@ -27,21 +27,19 @@ class AboutMe:
 
 
 def main():
-    about_me = {
-        "dimaG": {
-            "name": "Dmitriy G.",
-            "born_in": "Kiev, Ukraine",
-            "born_on": datetime(year=1969, month=9, day=5),
-            "place_of_residence": "Roselle, New Jersey",
-            "interests": [
-                {"Learning Programming": ["Python", "HTML", "CSS", "JavaScript"]},
-                "Science Fiction & Fantasy Audiobooks",
-                "Japanese Anime",
-            ],
-        }
-    }
+    """Main program"""
 
-    dimaG = AboutMe(**about_me["dimaG"])
+    dimaG = AboutMe(
+        name="Dmitriy G",
+        born_in="Kiev, Ukraine",
+        born_on=datetime(year=1969, month=9, day=5),
+        place_of_residence="Roselle, New Jersey",
+        interests=[
+            {"Learning Programming": ["Python", "HTML", "CSS", "JavaScript"]},
+            "Science Fiction & Fantasy Audiobooks",
+            "Japanese Anime",
+        ],
+    )
 
     dimaG.add_interest("Gaming")
 
