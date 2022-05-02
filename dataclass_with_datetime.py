@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List
 from pprint import pprint
+from typing import List
 
 
 @dataclass
@@ -48,7 +48,7 @@ def main():
         end="\n\n",
     )
 
-    pprint(dimaG.interests, indent=4, width=60)
+    pprint(dimaG.interests, indent=5)
 
 
 if __name__ == "__main__":

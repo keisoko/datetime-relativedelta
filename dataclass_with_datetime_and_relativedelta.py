@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from typing import List
-from dateutil.relativedelta import relativedelta
 from pprint import pprint
+from typing import List
+
+from dateutil.relativedelta import relativedelta
 
 
 @dataclass
@@ -46,7 +47,7 @@ def main():
         end="\n\n",
     )
 
-    pprint(dimaG.interests, indent=4, width=60)
+    pprint(dimaG.interests, indent=5)
 
 
 if __name__ == "__main__":
