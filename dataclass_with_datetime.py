@@ -42,8 +42,8 @@ class AboutMe:
 def execute_main():
     """Main program"""
 
-    dimaG = AboutMe(
-        name="Dmitriy G",
+    dmitriy = AboutMe(
+        name="Dmitriy G.",
         born_in="Kiev, Ukraine",
         place_of_residence="Roselle, New Jersey",
         interests=[
@@ -53,11 +53,11 @@ def execute_main():
         ],
     )
 
-    dimaG.add_interest("Gaming")
+    dmitriy.add_interest("Gaming")
 
-    print(dimaG.say_description, "\n")
+    print(dmitriy.say_description, "\n")
 
-    pprint(dimaG)
+    pprint(dmitriy)
 
 
 if __name__ == "__main__":
