@@ -5,6 +5,8 @@ from pprint import pformat
 
 @dataclass(frozen=True)
 class ConstantNamespace:
+    """Class for storing constant namespaces"""
+
     BIRTH_YEAR: int = 1969
 
 
