@@ -33,14 +33,13 @@ class AboutMe:
         """Returns my description."""
         return f"My name is {self.name}, I am {self.age()} years old from {self.born_in}. I was born on {self.born_on:%A, %B %d, %Y}."
 
-    def add_interest(self, new_interest):
+    def add_interest(self, new_interest: str) -> None:
         """Appends new interest to the interests list."""
         if new_interest not in self.interests:
             self.interests.append(new_interest)
 
 
 def execute_main():
-    """Main program"""
 
     dmitriy = AboutMe(
         name="Dmitriy G.",
