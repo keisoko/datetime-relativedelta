@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from pprint import pprint
+from pprint import pformat
 
 
 @dataclass(frozen=True)
@@ -17,7 +17,7 @@ class AboutMe:
 
     name: str
     born_in: str
-    place_of_residence: str
+    born_on: datetime
     interests: list[str | dict] = field(default_factory=list)
 
     @staticmethod
@@ -29,9 +29,7 @@ class AboutMe:
     @property
     def say_description(self) -> str:
         """Returns my description."""
-        return (
-            f"My name is {self.name}, I am {self.age()} years old from {self.born_in}."
-        )
+        return f"My name is {self.name}, I am {self.age()} years old from {self.born_in}. I was born on {self.born_on:%A, %B %d, %Y}."
 
     def add_interest(self, new_interest):
         """Appends new interest to the interests list."""
@@ -45,7 +43,7 @@ def execute_main():
     dmitriy = AboutMe(
         name="Dmitriy G.",
         born_in="Kiev, Ukraine",
-        place_of_residence="Roselle, New Jersey",
+        born_on=datetime(year=1969, month=9, day=5),
         interests=[
             {"Learning Programming": ["Python", "HTML", "CSS", "JavaScript"]},
             "Science Fiction & Fantasy Audiobooks",
@@ -57,7 +55,14 @@ def execute_main():
 
     print(dmitriy.say_description, "\n")
 
-    pprint(dmitriy)
+    # Removes single quotes and curly brackets from class
+    # object output by using pprint module's pformat
+    about_me = pformat(dmitriy)
+    char_to_remove = ["{", "}", "'"]
+    for char in char_to_remove:
+        about_me = about_me.replace(char, "")
+
+    print(about_me)
 
 
 if __name__ == "__main__":
