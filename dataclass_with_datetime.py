@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from pprint import pformat
+
+import my_python_modules as mpm
 
 
 @dataclass(frozen=True)
@@ -39,7 +40,7 @@ class AboutMe:
             self.interests.append(new_interest)
 
 
-def execute_main():
+def execute_main() -> None:
 
     dmitriy = AboutMe(
         name="Dmitriy G.",
@@ -56,14 +57,11 @@ def execute_main():
 
     print(dmitriy.say_description, "\n")
 
-    # Removes single quotes and curly brackets from class
-    # object output by using pprint module's pformat
-    about_me = pformat(dmitriy)
-    char_to_remove = ["{", "}", "'"]
-    for char in char_to_remove:
-        about_me = about_me.replace(char, "")
+    # Removes single quotes and curly brackets from class object output
 
-    print(about_me)
+    print(
+        mpm.pretty_print_item(item_to_pformat=dmitriy, char_to_remove=["{", "}", "'"])
+    )
 
 
 if __name__ == "__main__":
