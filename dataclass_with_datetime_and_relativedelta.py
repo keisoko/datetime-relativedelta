@@ -1,8 +1,9 @@
 from dataclasses import dataclass, field
 from datetime import datetime
-from pprint import pformat
 
 from dateutil.relativedelta import relativedelta
+
+import my_python_modules as mpm
 
 
 @dataclass(frozen=True)
@@ -57,15 +58,11 @@ def execute_main():
 
     print(dmitriy.say_description, "\n")
 
-    # Removes single quotes and curly brackets from class
-    # object output by using pprint module's pformat
+    # Removes single quotes and curly brackets from class object output
 
-    about_me = pformat(dmitriy)
-    char_to_remove = ["{", "}", "'"]
-    for char in char_to_remove:
-        about_me = about_me.replace(char, "")
-
-    print(about_me)
+    print(
+        mpm.pretty_print_item(item_to_pformat=dmitriy, char_to_remove=["{", "}", "'"])
+    )
 
 
 if __name__ == "__main__":
