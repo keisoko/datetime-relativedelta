@@ -1,9 +1,8 @@
 """My python modules"""
 
-import random
-import string
 from pprint import pformat
 from typing import Any, Callable, Iterable
+from uuid import uuid4
 
 
 def operate(func: Callable, item: Any) -> Callable:
@@ -11,9 +10,9 @@ def operate(func: Callable, item: Any) -> Callable:
     return func(item)
 
 
-def generate_id(length: int) -> str:
+def generate_id() -> str:
     """Helper function to generate id."""
-    return "".join(random.choices(string.hexdigits.upper(), k=length))
+    return uuid4().hex
 
 
 def pretty_print_item(item_to_pformat: Any, char_to_remove: Iterable[str]) -> str:
