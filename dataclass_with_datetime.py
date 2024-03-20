@@ -1,17 +1,20 @@
+"""Some info about me"""
+
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import date, datetime
+from typing import Self
 
 import my_python_modules as mpm
 
 
 @dataclass(frozen=True)
-class ConstantNamespace:
+class ConstantsNamespace:
     """Class for storing constant namespaces"""
 
     BIRTH_YEAR: int = 1969
 
 
-constant = ConstantNamespace()
+constant = ConstantsNamespace()
 
 
 @dataclass
@@ -20,7 +23,7 @@ class AboutMe:
 
     name: str
     born_in: str
-    born_on: datetime
+    born_on: date
     interests: list[str | dict] = field(default_factory=list)
 
     @staticmethod
@@ -32,20 +35,28 @@ class AboutMe:
     @property
     def say_description(self) -> str:
         """Returns my description."""
-        return f"My name is {self.name}, I am {self.age()} years old from {self.born_in}. I was born on {self.born_on:%A, %B %d, %Y}."
+        return (
+            f"My name is {self.name}, I am {self.age()} years old from {self.born_in}. "
+            f"I was born on {self.born_on:%A, %B %d, %Y}."
+        )
 
-    def add_interest(self, new_interest: str) -> None:
+    def __iadd__(self, new_interest: str) -> Self:
         """Appends new interest to the interests list."""
         if new_interest not in self.interests:
             self.interests.append(new_interest)
+        return self
+
+    def __getitem__(self, key):
+        return self.interests[key]
 
 
 def execute_main() -> None:
+    """Main function"""
 
     dmitriy = AboutMe(
         name="Dmitriy G.",
         born_in="Kiev, Ukraine",
-        born_on=datetime(year=1969, month=9, day=5),
+        born_on=date(year=1969, month=9, day=5),
         interests=[
             {"Learning Programming": ["Python", "HTML", "CSS", "JavaScript"]},
             "Science Fiction & Fantasy Audiobooks",
@@ -53,14 +64,18 @@ def execute_main() -> None:
         ],
     )
 
-    dmitriy.add_interest("Gaming")
+    dmitriy += "Gaming"
+    dmitriy += "Walking in the park"
 
     print(dmitriy.say_description, "\n")
+    print("My interests are:\n")
 
     # Removes single quotes and curly brackets from class object output
 
     print(
-        mpm.pretty_print_item(item_to_pformat=dmitriy, char_to_remove=["{", "}", "'"])
+        mpm.pretty_print_item(
+            item_to_pformat=dmitriy.interests, char_to_remove=["{", "}", "'"]
+        )
     )
 
 
