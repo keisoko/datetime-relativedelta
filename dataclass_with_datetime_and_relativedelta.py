@@ -1,16 +1,18 @@
-from dataclasses import dataclass, field
-from datetime import datetime
+"""Some info about me"""
 
-from dateutil.relativedelta import relativedelta
+from dataclasses import dataclass, field
+from datetime import date, datetime
+from typing import Self
 
 import my_python_modules as mpm
+from dateutil.relativedelta import relativedelta
 
 
 @dataclass(frozen=True)
 class ConstantNamespace:
     """Class for storing constant namespaces"""
 
-    BIRTH_YEAR = datetime(year=1969, month=9, day=5)
+    BIRTH_YEAR = date(year=1969, month=9, day=5)
 
 
 constant = ConstantNamespace()
@@ -18,9 +20,11 @@ constant = ConstantNamespace()
 
 @dataclass
 class AboutMe:
+    """Dataclass representing me"""
+
     name: str
     born_in: str
-    born_on: datetime
+    born_on: date
     interests: list[str | dict] = field(default_factory=list)
 
     @staticmethod
@@ -30,18 +34,26 @@ class AboutMe:
         diff = relativedelta(current_year, constant.BIRTH_YEAR)
         return f"{diff.years} years, {diff.months} months, {diff.days} days"
 
-    def add_interest(self, new_interest: str) -> None:
-        """Adds new interest to the interests list"""
-        if new_interest not in self.interests:
-            self.interests.append(new_interest)
-
     @property
     def say_description(self) -> str:
         """Returns my info"""
-        return f"My name is {self.name}, I am {self.age()} old from {self.born_in}. I was born on {self.born_on: %A, %B %d, %Y}."
+        return (
+            f"My name is {self.name}, I am {self.age()} old from {self.born_in}. "
+            f"I was born on {self.born_on: %A, %B %d, %Y}."
+        )
+
+    def __iadd__(self, new_interest: str) -> Self:
+        """Adds new interest to the interests list"""
+        if new_interest not in self.interests:
+            self.interests.append(new_interest)
+        return self
+
+    def __getitem__(self, key):
+        return self.interests[key]
 
 
 def execute_main():
+    """Executes the main program"""
 
     dmitriy = AboutMe(
         name="Dmitriy G.",
@@ -54,14 +66,18 @@ def execute_main():
         ],
     )
 
-    dmitriy.add_interest("Gaming")
+    dmitriy += "Gaming"
+    dmitriy += "Walking in the park"
 
     print(dmitriy.say_description, "\n")
+    print("My interests are:\n")
 
-    # Removes single quotes and curly brackets from class object output
+    # Removes single quotes and curly brackets from instance list output
 
     print(
-        mpm.pretty_print_item(item_to_pformat=dmitriy, char_to_remove=["{", "}", "'"])
+        mpm.pretty_print_item(
+            item_to_pformat=dmitriy.interests, char_to_remove=["{", "}", "'"]
+        )
     )
 
 
