@@ -2,19 +2,11 @@
 
 from dataclasses import dataclass, field
 from datetime import date, datetime
-from typing import Self
+from typing import Self, Final
 
 import my_python_modules as mpm
 
-
-@dataclass(frozen=True)
-class ConstantsNamespace:
-    """Class for storing constant namespaces"""
-
-    BIRTH_YEAR: int = 1969
-
-
-constant = ConstantsNamespace()
+BIRTH_YEAR: Final[int] = 1969
 
 
 @dataclass
@@ -30,7 +22,7 @@ class AboutMe:
     def age() -> int:
         """Returns my current age."""
         current_year = datetime.now().year
-        return current_year - constant.BIRTH_YEAR
+        return current_year - BIRTH_YEAR
 
     @property
     def say_description(self) -> str:
