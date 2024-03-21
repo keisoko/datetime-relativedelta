@@ -86,6 +86,12 @@ def execute_main():
     print(dima.say_description, "\n")
     print("My interests are:\n")
 
+    # Gets and Sorts a list of the programming languages in the dictionary
+
+    get_list = itemgetter(0)
+    dict_list_of_languages = get_list(dima.interests)
+    dict_list_of_languages["Learning Programming"].sort()
+
     # Removes single quotes and curly brackets from instance list output
 
     print(
