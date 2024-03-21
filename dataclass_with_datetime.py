@@ -55,8 +55,8 @@ class AboutMe:
 def execute_main() -> None:
     """Main function"""
 
-    dmitriy = AboutMe(
-        name="Dmitriy G.",
+    dima = AboutMe(
+        name="Dima Goldner",
         born_in="Kiev, Ukraine",
         born_on=date(year=1969, month=9, day=5),
         interests=[
@@ -66,17 +66,17 @@ def execute_main() -> None:
         ],
     )
 
-    dmitriy += "Gaming"
-    dmitriy += "Walking in the park"
+    dima += "Gaming"
+    dima += "Walking in the park"
 
-    print(dmitriy.say_description, "\n")
+    print(dima.say_description, "\n")
     print("My interests are:\n")
 
     # Removes single quotes and curly brackets from class object output
 
     print(
         mpm.pretty_print_item(
-            item_to_pformat=dmitriy.interests, char_to_remove=["{", "}", "'"]
+            item_to_pformat=dima.interests, char_to_remove=["{", "}", "'"]
         )
     )
 
