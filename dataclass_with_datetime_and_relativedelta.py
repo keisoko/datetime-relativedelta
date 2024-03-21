@@ -29,6 +29,14 @@ class AboutMe:
     email: str = field(init=False)
     interests: list[str | dict] = field(default_factory=list)
 
+    def __post_init__(self):
+        """Initializes email field based on instance name attribute"""
+        email_username = self.name.casefold().split()
+        if len(email_username) > 1:
+            self.email = f"{"_".join(email_username)}@.about.com"
+        else:
+            self.email = f"{email_username[0]}@.about.com"
+
     @staticmethod
     def age() -> str:
         """Returns my age in years, month, days"""
