@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass, field
 from datetime import date, datetime
+from operator import itemgetter
 from typing import Self
 
 import my_python_modules as mpm
@@ -25,6 +26,7 @@ class AboutMe:
     name: str
     born_in: str
     born_on: date
+    email: str = field(init=False)
     interests: list[str | dict] = field(default_factory=list)
 
     @staticmethod
