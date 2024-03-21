@@ -76,8 +76,12 @@ def execute_main():
         ],
     )
 
+    # Making use of  __iadd__ and __getitem__ methods to add additional interests and
+    # programming languages to the appropriate lists
+
     dima += "Gaming"
     dima += "Walking in the park"
+    dima[0]["Learning Programming"] += ["Go"]
 
     print(dima.say_description, "\n")
     print("My interests are:\n")
